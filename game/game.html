@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>GAME</h1>
+    </header>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    <script src="game.js"></script>
+    <a href="/Index.html"><button id="buton">BALIK KE BERANDA</button></a>
+    <style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+header {
+    background-color: #87CEEB;
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    color: #ffffff;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.game-container {
+    width: 80%;
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px; /* Jarak dari header */
+}
+
+canvas {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%; /* Responsif */
+}
+    </style>
+    
+    <script>
+      const canvas = document.getElementById('gameCanvas');
+const context = canvas.getContext('2d');
+
+canvas.width = 500;
+canvas.height = 400;
+
+let x = canvas.width / 2;
+let y = canvas.height - 30;
+let dx = 2;
+let dy = -2;
+const ballRadius = 10;
+
+function drawBall() {
+    context.beginPath();
+    context.arc(x, y, ballRadius, 0, Math.PI * 2);
+    context.fillStyle = "#0095DD";
+    context.fill();
+    context.closePath();
+}
+
+function draw() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    drawBall();
+
+    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+        dx = -dx;
+    }
+    if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+        dy = -dy;
+    }
+
+    x += dx;
+    y += dy;
+}
+
+setInterval(draw, 10);
+    </script>
+</body>
+</html>
